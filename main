@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AlcoMaps 🍻</title>
+  <title>AlcoMaps 🍺</title>
   <link rel="stylesheet" href="style.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
 </head>
 <body>
   <div class="container">
@@ -13,49 +17,12 @@
 
     <button id="find-btn">Ищу компанию 🍻</button>
 
+    <div id="map"></div>
     <div id="result"></div>
   </div>
 
-  <!-- Подключаем Telegram API -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <!-- Основной JS-код -->
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.expand(); // Разворачиваем интерфейс на весь экран
-
-    // Показываем имя пользователя
-    const userInfo = document.getElementById("user-info");
-    userInfo.innerText = `Привет, ${tg.initDataUnsafe?.user?.first_name || "гость"}!`;
-
-    const findBtn = document.getElementById("find-btn");
-    const result = document.getElementById("result");
-
-    // При нажатии кнопки "Ищу компанию"
-    findBtn.addEventListener("click", () => {
-      findBtn.disabled = true;
-      findBtn.innerText = "Поиск собутыльников...";
-      result.innerText = "";
-
-      // Показываем MainButton Telegram
-      tg.MainButton.setText("Отменить поиск");
-      tg.MainButton.show();
-
-      tg.MainButton.onClick(() => {
-        tg.MainButton.hide();
-        findBtn.disabled = false;
-        findBtn.innerText = "Ищу компанию 🍻";
-        result.innerText = "❌ Поиск отменён.";
-      });
-
-      // Имитация поиска поблизости
-      setTimeout(() => {
-        result.innerText = "🍻 Найдено 3 человека рядом, хотят выпить!";
-        findBtn.disabled = false;
-        findBtn.innerText = "Ищу компанию 🍻";
-        tg.MainButton.hide();
-      }, 2500);
-    });
-  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
